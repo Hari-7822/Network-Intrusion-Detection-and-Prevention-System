@@ -1,9 +1,12 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QAction, QMessageBox, QLabel, QVBoxLayout, QWidget, QPushButton, QTextEdit,QTableWidget, QTableWidgetItem, QHeaderView, QFileDialog, QHBoxLayout,QAbstractScrollArea,QSizePolicy
+from PyQt5.QtWidgets import QApplication, QMainWindow, QAction, QMessageBox, QLabel, QVBoxLayout, QWidget, QPushButton, QTextEdit,QTableWidget, QTableWidgetItem, QHeaderView, QFileDialog, QHBoxLayout,QAbstractScrollArea,QSizePolicy, QDialog
 from PyQt5.QtGui import QColor
 from PyQt5.QtCore import Qt, QTimer
 from scapy.all import *
 import csv
+
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 class LandingPage(QWidget):
     def __init__(self):
@@ -151,6 +154,12 @@ class MainWindow(QMainWindow):
         ni_action.triggered.connect(self.select_interface)
         ni_menu.addAction(ni_action)
 
+        # Dashboard menu
+        dashboard_menu = menu_bar.addMenu("Dashboard")
+        dashboard_action = QAction("Dashboard", self)
+        dashboard_action.triggered.connect(self.open_dashboard)
+        dashboard_menu.addAction(dashboard_action)
+
     def close_application(self):
         choice = QMessageBox.question(self, "Exit", "Are you sure you want to exit?", QMessageBox.Yes | QMessageBox.No)
         if choice == QMessageBox.Yes:
@@ -170,6 +179,40 @@ class MainWindow(QMainWindow):
             for col in range(self.table.columnCount()):
                 self.table.item(row, col).setBackground(QColor("#f0f0f0"))  # Lighter color
 
+    def open_dashboard(self):
+        self.dashboard = Dashboard()
+        self.dashboard.show()
+
+
+class Dashboard(QWidget):
+    def __init__(self):
+        super().__init__()
+
+        layout = QVBoxLayout()
+        self.setLayout(layout)
+
+        label = QLabel("Dashboard")
+        label.setAlignment(Qt.AlignCenter)
+        layout.addWidget(label)
+
+        # Create and embed a Matplotlib figure
+        self.figure = plt.figure()
+        self.canvas = plt.FigureCanvas(self.figure)
+        layout.addWidget(self.canvas)
+
+        # Example chart or list widgets can be added here
+        self.plot_chart()
+
+    def plot_chart(self):
+        # Example chart using Seaborn
+        data = sns.load_dataset("iris")
+        sns.scatterplot(x="sepal_length", y="sepal_width", hue="species", data=data, ax=self.figure.add_subplot(111))
+        plt.title("Sepal Length vs Sepal Width")
+        plt.xlabel("Sepal Length")
+        plt.ylabel("Sepal Width")
+        plt.tight_layout()
+        self.canvas.draw()
+
 
 def main():
     app = QApplication(sys.argv)
@@ -179,6 +222,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-

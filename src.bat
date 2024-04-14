@@ -1,0 +1,1 @@
+call .\venv\Scripts\activate.bat & cd UI & python v2.py
