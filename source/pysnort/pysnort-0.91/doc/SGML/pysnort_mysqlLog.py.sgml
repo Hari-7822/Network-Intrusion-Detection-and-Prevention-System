@@ -1,0 +1,462 @@
+Mysql log class<sect3>
+<title>Methods</title><formalpara>
+<title>None</title>
+<para><itemizedlist>
+<listitem><para><xref linkend="__buildDataCustomQuery"></para></listitem>
+<listitem><para><xref linkend="__buildPortCustomQueryICMP"></para></listitem>
+<listitem><para><xref linkend="__buildPortCustomQueryTCP"></para></listitem>
+<listitem><para><xref linkend="__buildPortCustomQueryTCP2"></para></listitem>
+<listitem><para><xref linkend="__buildPortCustomQueryUDP"></para></listitem>
+<listitem><para><xref linkend="__getHostsPorts"></para></listitem>
+<listitem><para><xref linkend="buildCustomQuery"></para></listitem>
+<listitem><para><xref linkend="connect"></para></listitem>
+<listitem><para><xref linkend="dot2SnortIP"></para></listitem>
+<listitem><para><xref linkend="executeQuery"></para></listitem>
+<listitem><para><xref linkend="executeRSQuery"></para></listitem>
+<listitem><para><xref linkend="fillEventData"></para></listitem>
+<listitem><para><xref linkend="fillLightSignatureData"></para></listitem>
+<listitem><para><xref linkend="fillSignatureData"></para></listitem>
+<listitem><para><xref linkend="getAllEvents"></para></listitem>
+<listitem><para><xref linkend="getAllSensors"></para></listitem>
+<listitem><para><xref linkend="getAllSignatures"></para></listitem>
+<listitem><para><xref linkend="getEncodingType"></para></listitem>
+<listitem><para><xref linkend="getEventByDstIP"></para></listitem>
+<listitem><para><xref linkend="getEventByDstIPRange"></para></listitem>
+<listitem><para><xref linkend="getEventByDstPort"></para></listitem>
+<listitem><para><xref linkend="getEventByID"></para></listitem>
+<listitem><para><xref linkend="getEventByIDRange"></para></listitem>
+<listitem><para><xref linkend="getEventByProtocol"></para></listitem>
+<listitem><para><xref linkend="getEventBySensorID"></para></listitem>
+<listitem><para><xref linkend="getEventBySignatureID"></para></listitem>
+<listitem><para><xref linkend="getEventBySrcIP"></para></listitem>
+<listitem><para><xref linkend="getEventBySrcIPRange"></para></listitem>
+<listitem><para><xref linkend="getEventBySrcPort"></para></listitem>
+<listitem><para><xref linkend="getEventByTimeRange"></para></listitem>
+<listitem><para><xref linkend="getEventByTimestamp"></para></listitem>
+<listitem><para><xref linkend="getEventCount"></para></listitem>
+<listitem><para><xref linkend="getLastEvents"></para></listitem>
+<listitem><para><xref linkend="getPacketPayload"></para></listitem>
+<listitem><para><xref linkend="getProtocolData"></para></listitem>
+<listitem><para><xref linkend="getProtocolID"></para></listitem>
+<listitem><para><xref linkend="getProtocolName"></para></listitem>
+<listitem><para><xref linkend="getQueryString"></para></listitem>
+<listitem><para><xref linkend="getSigClassID"></para></listitem>
+<listitem><para><xref linkend="getSigClassName"></para></listitem>
+<listitem><para><xref linkend="getSignatureByClassID"></para></listitem>
+<listitem><para><xref linkend="getSignatureByClassName"></para></listitem>
+<listitem><para><xref linkend="getSignatureByID"></para></listitem>
+<listitem><para><xref linkend="getSignatureByName"></para></listitem>
+<listitem><para><xref linkend="getSignatureByPriority"></para></listitem>
+<listitem><para><xref linkend="getSignatureByRev"></para></listitem>
+<listitem><para><xref linkend="getSignatureBySID"></para></listitem>
+<listitem><para><xref linkend="getUniqueSignatureCount"></para></listitem>
+<listitem><para><xref linkend="getUniqueSignaturesID"></para></listitem>
+<listitem><para><xref linkend="snortDate2Tuple"></para></listitem>
+<listitem><para><xref linkend="snortIP2dot"></para></listitem>
+<listitem><para><xref linkend="tuple2SnortDate"></para></listitem>
+
+</itemizedlist></para></formalpara><sect3>
+<title>__buildDataCustomQuery</title><programlisting>
+__buildDataCustomQuery ( self,  q )
+
+</programlisting>
+Internal Function<sect3>
+<title>__buildPortCustomQueryICMP</title><programlisting>
+__buildPortCustomQueryICMP ( self,  q )
+
+</programlisting>
+Internal Function<sect3>
+<title>__buildPortCustomQueryTCP</title><programlisting>
+__buildPortCustomQueryTCP ( self,  q )
+
+</programlisting>
+Internal Function
+
+ GOTTA MAKE THIS BETTER!<sect3>
+<title>__buildPortCustomQueryTCP2</title><programlisting>
+__buildPortCustomQueryTCP2 ( self,  q )
+
+</programlisting>
+Internal Function<sect3>
+<title>__buildPortCustomQueryUDP</title><programlisting>
+__buildPortCustomQueryUDP ( self,  q )
+
+</programlisting>
+Internal Function<sect3>
+<title>__getHostsPorts</title><programlisting>
+__getHostsPorts (
+        self,
+        conn,
+        cid,
+        proto,
+        )
+
+</programlisting>
+Internal Function<sect3>
+<title>buildCustomQuery</title><programlisting>
+buildCustomQuery ( self,  q )
+
+</programlisting>
+Builds an SQL String with the corresponding sensor ids<sect3>
+<title>connect</title><programlisting>
+connect (
+        self,
+        host,
+        user,
+        password,
+        )
+
+</programlisting>
+Connects with the database and returns a connection object<sect3>
+<title>dot2SnortIP</title><programlisting>
+dot2SnortIP ( self,  dotip )
+
+</programlisting>
+Transforms a dotted-address IP into an unsigned long int<sect3>
+<title>executeQuery</title><programlisting>
+executeQuery (
+        self,
+        conn,
+        query_clause,
+        )
+
+</programlisting>
+Executes a query and returns the error code<sect3>
+<title>executeRSQuery</title><programlisting>
+executeRSQuery (
+        self,
+        conn,
+        query_clause,
+        )
+
+</programlisting>
+Executes a query and returns an array with the data<sect3>
+<title>fillEventData</title><programlisting>
+fillEventData (
+        self,
+        conn,
+        rs,
+        )
+
+</programlisting>
+Fills the Event class with the cursor rs<sect3>
+<title>fillLightSignatureData</title><programlisting>
+fillLightSignatureData (
+        self,
+        conn,
+        rs,
+        )
+
+</programlisting>
+Returns a CSignature object from the given recordset but without the reference data<sect3>
+<title>fillSignatureData</title><programlisting>
+fillSignatureData (
+        self,
+        conn,
+        rs,
+        )
+
+</programlisting>
+Returns a CSignature object from the given recordset<sect3>
+<title>getAllEvents</title><programlisting>
+getAllEvents ( self,  conn )
+
+</programlisting>
+Returns an array with all the events in the database<sect3>
+<title>getAllSensors</title><programlisting>
+getAllSensors ( self,  conn )
+
+</programlisting>
+Returns an array with all the working sensors<sect3>
+<title>getAllSignatures</title><programlisting>
+getAllSignatures ( self,  conn )
+
+</programlisting>
+Returns an array with all the signatures found<sect3>
+<title>getEncodingType</title><programlisting>
+getEncodingType (
+        self,
+        conn,
+        encoding_id,
+        )
+
+</programlisting>
+Returns an string with the name of the encoding used<sect3>
+<title>getEventByDstIP</title><programlisting>
+getEventByDstIP (
+        self,
+        conn,
+        ip,
+        )
+
+</programlisting>
+Returns an array of event objects that match the Destination IP<sect3>
+<title>getEventByDstIPRange</title><programlisting>
+getEventByDstIPRange (
+        self,
+        conn,
+        start_ip,
+        end_ip,
+        )
+
+</programlisting>
+Returns and array of event objects that has any of the destination addresses between start_ip and end_ip<sect3>
+<title>getEventByDstPort</title><programlisting>
+getEventByDstPort (
+        self,
+        conn,
+        proto,
+        port,
+        )
+
+</programlisting>
+Returns an array of event objects that match the Destination Port<sect3>
+<title>getEventByID</title><programlisting>
+getEventByID (
+        self,
+        conn,
+        event_id,
+        )
+
+</programlisting>
+Returns an event object with the specified event_id<sect3>
+<title>getEventByIDRange</title><programlisting>
+getEventByIDRange (
+        self,
+        conn,
+        event_id_first,
+        event_id_last,
+        )
+
+</programlisting>
+Returns an array with all events between event_id_first and event_id_last. Use 0 as wildcard<sect3>
+<title>getEventByProtocol</title><programlisting>
+getEventByProtocol (
+        self,
+        conn,
+        proto,
+        )
+
+</programlisting>
+Returns an array of event objects that match the Protocol<sect3>
+<title>getEventBySensorID</title><programlisting>
+getEventBySensorID (
+        self,
+        conn,
+        sensor_id,
+        )
+
+</programlisting>
+Returns an array of event objects that match the Sensor ID<sect3>
+<title>getEventBySignatureID</title><programlisting>
+getEventBySignatureID (
+        self,
+        conn,
+        signature_id,
+        )
+
+</programlisting>
+Returns an array of event objects that match the signature ID<sect3>
+<title>getEventBySrcIP</title><programlisting>
+getEventBySrcIP (
+        self,
+        conn,
+        ip,
+        )
+
+</programlisting>
+Returns an array of event objects that match the Source IP<sect3>
+<title>getEventBySrcIPRange</title><programlisting>
+getEventBySrcIPRange (
+        self,
+        conn,
+        start_ip,
+        end_ip,
+        )
+
+</programlisting>
+Returns and array of event objects that has any of the source addresses between start_ip and end_ip<sect3>
+<title>getEventBySrcPort</title><programlisting>
+getEventBySrcPort (
+        self,
+        conn,
+        proto,
+        port,
+        )
+
+</programlisting>
+Returns an array of event objects that match the Source Port<sect3>
+<title>getEventByTimeRange</title><programlisting>
+getEventByTimeRange (
+        self,
+        conn,
+        ts_from,
+        ts_to,
+        )
+
+</programlisting>
+Returns and array of event objects that happened between ts_from and ts_to. Use 0 as wildcard<sect3>
+<title>getEventByTimestamp</title><programlisting>
+getEventByTimestamp (
+        self,
+        conn,
+        timestamp,
+        )
+
+</programlisting>
+Returns and array of event objects that happened exactly at the timestamp date<sect3>
+<title>getEventCount</title><programlisting>
+getEventCount ( self,  conn )
+
+</programlisting>
+Returns an integer with the number of events occured<sect3>
+<title>getLastEvents</title><programlisting>
+getLastEvents (
+        self,
+        conn,
+        number,
+        )
+
+</programlisting>
+Returns an array with the last 'number' events<sect3>
+<title>getPacketPayload</title><programlisting>
+getPacketPayload (
+        self,
+        conn,
+        event_id,
+        )
+
+</programlisting>
+Returns the data payload from packet event_id<sect3>
+<title>getProtocolData</title><programlisting>
+getProtocolData (
+        self,
+        conn,
+        proto,
+        event_id,
+        sensor_id,
+        )
+
+</programlisting>
+Fills protocol specific data for event_id and ensor_id<sect3>
+<title>getProtocolID</title><programlisting>
+getProtocolID ( self,  proto )
+
+</programlisting>
+Returns the integer ID of the protocol<sect3>
+<title>getProtocolName</title><programlisting>
+getProtocolName ( self,  num )
+
+</programlisting>
+Returns a string with the name of the protocol num<sect3>
+<title>getQueryString</title><programlisting>
+getQueryString ( self )
+
+</programlisting>
+Generates a standard query string using self.sensor_id array<sect3>
+<title>getSigClassID</title><programlisting>
+getSigClassID (
+        self,
+        conn,
+        sig_class_name,
+        )
+
+</programlisting>
+Returns the Class_ID for 'sig_class_name'<sect3>
+<title>getSigClassName</title><programlisting>
+getSigClassName (
+        self,
+        conn,
+        class_id,
+        )
+
+</programlisting>
+Gets a class Name (sig_class_name) for a class ID (sig_class_id)<sect3>
+<title>getSignatureByClassID</title><programlisting>
+getSignatureByClassID (
+        self,
+        conn,
+        sig_class_id,
+        )
+
+</programlisting>
+Returns a CSignature object array given the class id<sect3>
+<title>getSignatureByClassName</title><programlisting>
+getSignatureByClassName (
+        self,
+        conn,
+        sig_class,
+        )
+
+</programlisting>
+Returns a CSignature object array given the class name<sect3>
+<title>getSignatureByID</title><programlisting>
+getSignatureByID (
+        self,
+        conn,
+        sig_id,
+        )
+
+</programlisting>
+Returns a CSignature object given the corresponding sig_id<sect3>
+<title>getSignatureByName</title><programlisting>
+getSignatureByName (
+        self,
+        conn,
+        sig_name,
+        )
+
+</programlisting>
+Returns a CSignature object given the corresponding sig_name<sect3>
+<title>getSignatureByPriority</title><programlisting>
+getSignatureByPriority (
+        self,
+        conn,
+        sig_priority,
+        )
+
+</programlisting>
+Returns a CSignature object array given for the given sig_priority<sect3>
+<title>getSignatureByRev</title><programlisting>
+getSignatureByRev (
+        self,
+        conn,
+        sig_rev,
+        )
+
+</programlisting>
+Returns a CSignature object given the corresponding sig_rev<sect3>
+<title>getSignatureBySID</title><programlisting>
+getSignatureBySID (
+        self,
+        conn,
+        sig_sid,
+        )
+
+</programlisting>
+Returns a CSignature object given the corresponding sig_sid<sect3>
+<title>getUniqueSignatureCount</title><programlisting>
+getUniqueSignatureCount ( self,  conn )
+
+</programlisting>
+Returns an integer with the number of unique signatures found<sect3>
+<title>getUniqueSignaturesID</title><programlisting>
+getUniqueSignaturesID ( self,  conn )
+
+</programlisting>
+Returns an array of integers with the signature_id of the unique signatures<sect3>
+<title>snortDate2Tuple</title><programlisting>
+snortDate2Tuple ( self,  snortdate )
+
+</programlisting>
+Returns snort-formatted date in tuple format<sect3>
+<title>snortIP2dot</title><programlisting>
+snortIP2dot ( self,  iplong )
+
+</programlisting>
+Transforms an unsigned long int representing an IP into a full-dotted address<sect3>
+<title>tuple2SnortDate</title><programlisting>
+tuple2SnortDate ( self,  datetuple )
+
+</programlisting>
+Returns tuple-formatted date in snort format</sect3></sect3>

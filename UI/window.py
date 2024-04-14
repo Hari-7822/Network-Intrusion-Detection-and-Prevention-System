@@ -1,128 +1,13 @@
-import sys
-import sqlite3
-from PyQt5.QtWidgets import QApplication, QMainWindow, QAction, QMessageBox, QLabel, QVBoxLayout, QWidget, QPushButton, QTextEdit,QTableWidget, QTableWidgetItem, QHeaderView, QFileDialog, QHBoxLayout,QAbstractScrollArea,QSizePolicy, QDialog, QMenu, QLineEdit
+# main_window.py
+
+from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QLabel, QPushButton, QHBoxLayout, QTableWidget, QTableWidgetItem, QAbstractScrollArea, QSizePolicy, QMessageBox, QAction, QMenu
 from PyQt5.QtGui import QColor
 from PyQt5.QtCore import Qt, QTimer
 from scapy.all import *
-import csv
-
-import matplotlib.pyplot as plt
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-import seaborn as sns
-
-class LoginWindow(QDialog):
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.setWindowTitle("Login")
-        layout = QVBoxLayout()
-        self.setLayout(layout)
-
-        self.username_input = QLineEdit()
-        self.username_input.setPlaceholderText("Username")
-        layout.addWidget(self.username_input)
-
-        self.password_input = QLineEdit()
-        self.password_input.setPlaceholderText("Password")
-        self.password_input.setEchoMode(QLineEdit.Password)
-        layout.addWidget(self.password_input)
-
-        login_button = QPushButton("Login")
-        login_button.clicked.connect(self.login)
-        layout.addWidget(login_button)
-
-        signup_button = QPushButton("Sign Up")
-        signup_button.clicked.connect(self.show_signup_window)
-        layout.addWidget(signup_button)
-
-    def login(self):
-        username = self.username_input.text()
-        password = self.password_input.text()
-
-        # Connect to SQLite database
-        connection = sqlite3.connect("users.sqlite")
-        cursor = connection.cursor()
-
-        # Check if user exists in the database
-        cursor.execute("SELECT * FROM users WHERE username = ? AND password = ?", (username, password))
-        user = cursor.fetchone()
-
-        if user:
-            self.accept()  # Close the login window and return QDialog.Accepted
-        else:
-            QMessageBox.warning(self, "Login Failed", "Invalid username or password.")
-
-    def show_signup_window(self):
-        self.signup_window = SignupWindow()
-        self.signup_window.exec_()
-
-class SignupWindow(QDialog):
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.setWindowTitle("Sign Up")
-        layout = QVBoxLayout()
-        self.setLayout(layout)
-
-        self.username_input = QLineEdit()
-        self.username_input.setPlaceholderText("Username")
-        layout.addWidget(self.username_input)
-
-        self.password_input = QLineEdit()
-        self.password_input.setPlaceholderText("Password")
-        self.password_input.setEchoMode(QLineEdit.Password)
-        layout.addWidget(self.password_input)
-
-        signup_button = QPushButton("Sign Up")
-        signup_button.clicked.connect(self.signup)
-        layout.addWidget(signup_button)
-
-    def signup(self):
-        username = self.username_input.text()
-        password = self.password_input.text()
-
-        # Connect to SQLite database
-        connection = sqlite3.connect("users.db")
-        cursor = connection.cursor()
-
-        # Check if username already exists
-        cursor.execute("SELECT * FROM users WHERE username = ?", (username,))
-        existing_user = cursor.fetchone()
-
-        if existing_user:
-            QMessageBox.warning(self, "Sign Up Failed", "Username already exists.")
-        else:
-            cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password))
-            connection.commit()
-            QMessageBox.information(self, "Sign Up Success", "User registered successfully.")
-            self.accept()  # Close the sign-up window and return QDialog.Accepted
-
-class LandingPage(QWidget):
-    def __init__(self):
-        super().__init__()
-        self.setWindowTitle("NIDPS")
-        layout = QVBoxLayout()
-        self.setLayout(layout)
-
-        self.setGeometry(100, 100, 700, 300)
-
-        label = QLabel("Welcome to NIDPS")
-        label.setAlignment(Qt.AlignCenter)
-        layout.addWidget(label)
-
-        btn_start = QPushButton("Login")
-        btn_start.clicked.connect(self.show_login_window)
-        layout.addWidget(btn_start)
-
-    def show_login_window(self):
-        login_window = LoginWindow()
-        if login_window.exec_() == QDialog.Accepted:
-            # User logged in successfully
-            username = login_window.username_input.text()
-            self.main_window = MainWindow(username)
-            self.main_window.show()
-            self.close()
+from dashboard import Dashboard
 
 class MainWindow(QMainWindow):
-    def __init__(self, username):
+    def __init__(self):
         super().__init__()
 
         self.setWindowTitle("NIDPS")
@@ -140,7 +25,7 @@ class MainWindow(QMainWindow):
         top_layout = QHBoxLayout()
         layout.addLayout(top_layout)
 
-        self.label = QLabel(f"Scanning the Network... Welcome, {username}!")
+        self.label = QLabel("Scanning the Network...")
         self.label.setAlignment(Qt.AlignTop)
         top_layout.addWidget(self.label)
 
@@ -192,7 +77,7 @@ class MainWindow(QMainWindow):
             if packet.haslayer(IP):
                 src = packet[IP].src
                 dst = packet[IP].dst
-                proto = packet[IP].proto
+                proto = packet.proto
                 msg_len = len(packet)
                 
                 row_position = self.table.rowCount()
@@ -301,43 +186,3 @@ class MainWindow(QMainWindow):
         send(unreach_pkt)
         
         return True
-
-
-class Dashboard(QWidget):
-    def __init__(self):
-        super().__init__()
-
-        layout = QVBoxLayout()
-        self.setLayout(layout)
-
-        label = QLabel("Dashboard")
-        label.setAlignment(Qt.AlignCenter)
-        layout.addWidget(label)
-
-        # Create and embed a Matplotlib figure
-        self.figure = plt.figure()
-        self.canvas = FigureCanvas(self.figure)
-        layout.addWidget(self.canvas)
-
-        # Example chart or list widgets can be added here
-        self.plot_chart()
-
-    def plot_chart(self):
-        # Example chart using Seaborn
-        data = sns.load_dataset("iris")
-        sns.scatterplot(x="sepal_length", y="sepal_width", hue="species", data=data, ax=self.figure.add_subplot(111))
-        plt.title("Sepal Length vs Sepal Width")
-        plt.xlabel("Sepal Length")
-        plt.ylabel("Sepal Width")
-        plt.tight_layout()
-        self.canvas.draw()
-
-
-def main():
-    app = QApplication(sys.argv)
-    landing_page = LandingPage()
-    landing_page.show()
-    sys.exit(app.exec_())
-
-if __name__ == "__main__":
-    main()

@@ -1,0 +1,16 @@
+
+** Imported modules **
+
+	* import MySQLdb
+	* from string (standard module) import upper, find, split
+	* import time (standard module)
+
+
+
+** Classes **
+
+	mysqlLog (see pysnort_mysqlLog.py.txt) : Mysql log class
+
+
+
+
