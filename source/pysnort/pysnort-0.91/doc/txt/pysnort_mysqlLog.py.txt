@@ -1,0 +1,516 @@
+	Mysql log class
+
+
+** Methods **
+
+	* __buildDataCustomQuery (see __buildDataCustomQuery)
+	* __buildPortCustomQueryICMP (see __buildPortCustomQueryICMP)
+	* __buildPortCustomQueryTCP (see __buildPortCustomQueryTCP)
+	* __buildPortCustomQueryTCP2 (see __buildPortCustomQueryTCP2)
+	* __buildPortCustomQueryUDP (see __buildPortCustomQueryUDP)
+	* __getHostsPorts (see __getHostsPorts)
+	* buildCustomQuery (see buildCustomQuery)
+	* connect (see connect)
+	* dot2SnortIP (see dot2SnortIP)
+	* executeQuery (see executeQuery)
+	* executeRSQuery (see executeRSQuery)
+	* fillEventData (see fillEventData)
+	* fillLightSignatureData (see fillLightSignatureData)
+	* fillSignatureData (see fillSignatureData)
+	* getAllEvents (see getAllEvents)
+	* getAllSensors (see getAllSensors)
+	* getAllSignatures (see getAllSignatures)
+	* getEncodingType (see getEncodingType)
+	* getEventByDstIP (see getEventByDstIP)
+	* getEventByDstIPRange (see getEventByDstIPRange)
+	* getEventByDstPort (see getEventByDstPort)
+	* getEventByID (see getEventByID)
+	* getEventByIDRange (see getEventByIDRange)
+	* getEventByProtocol (see getEventByProtocol)
+	* getEventBySensorID (see getEventBySensorID)
+	* getEventBySignatureID (see getEventBySignatureID)
+	* getEventBySrcIP (see getEventBySrcIP)
+	* getEventBySrcIPRange (see getEventBySrcIPRange)
+	* getEventBySrcPort (see getEventBySrcPort)
+	* getEventByTimeRange (see getEventByTimeRange)
+	* getEventByTimestamp (see getEventByTimestamp)
+	* getEventCount (see getEventCount)
+	* getLastEvents (see getLastEvents)
+	* getPacketPayload (see getPacketPayload)
+	* getProtocolData (see getProtocolData)
+	* getProtocolID (see getProtocolID)
+	* getProtocolName (see getProtocolName)
+	* getQueryString (see getQueryString)
+	* getSigClassID (see getSigClassID)
+	* getSigClassName (see getSigClassName)
+	* getSignatureByClassID (see getSignatureByClassID)
+	* getSignatureByClassName (see getSignatureByClassName)
+	* getSignatureByID (see getSignatureByID)
+	* getSignatureByName (see getSignatureByName)
+	* getSignatureByPriority (see getSignatureByPriority)
+	* getSignatureByRev (see getSignatureByRev)
+	* getSignatureBySID (see getSignatureBySID)
+	* getUniqueSignatureCount (see getUniqueSignatureCount)
+	* getUniqueSignaturesID (see getUniqueSignaturesID)
+	* snortDate2Tuple (see snortDate2Tuple)
+	* snortIP2dot (see snortIP2dot)
+	* tuple2SnortDate (see tuple2SnortDate)
+
+
+== __buildDataCustomQuery ==
+
+__buildDataCustomQuery ( self,  q )
+	Internal Function
+
+
+== __buildPortCustomQueryICMP ==
+
+__buildPortCustomQueryICMP ( self,  q )
+	Internal Function
+
+
+== __buildPortCustomQueryTCP ==
+
+__buildPortCustomQueryTCP ( self,  q )
+	Internal Function
+	
+	GOTTA MAKE THIS BETTER!
+
+
+== __buildPortCustomQueryTCP2 ==
+
+__buildPortCustomQueryTCP2 ( self,  q )
+	Internal Function
+
+
+== __buildPortCustomQueryUDP ==
+
+__buildPortCustomQueryUDP ( self,  q )
+	Internal Function
+
+
+== __getHostsPorts ==
+
+__getHostsPorts (
+        self,
+        conn,
+        cid,
+        proto,
+        )
+	Internal Function
+
+
+== buildCustomQuery ==
+
+buildCustomQuery ( self,  q )
+	Builds an SQL String with the corresponding sensor ids
+
+
+== connect ==
+
+connect (
+        self,
+        host,
+        user,
+        password,
+        )
+	Connects with the database and returns a connection object
+
+
+== dot2SnortIP ==
+
+dot2SnortIP ( self,  dotip )
+	Transforms a dotted-address IP into an unsigned long int
+
+
+== executeQuery ==
+
+executeQuery (
+        self,
+        conn,
+        query_clause,
+        )
+	Executes a query and returns the error code
+
+
+== executeRSQuery ==
+
+executeRSQuery (
+        self,
+        conn,
+        query_clause,
+        )
+	Executes a query and returns an array with the data
+
+
+== fillEventData ==
+
+fillEventData (
+        self,
+        conn,
+        rs,
+        )
+	Fills the Event class with the cursor rs
+
+
+== fillLightSignatureData ==
+
+fillLightSignatureData (
+        self,
+        conn,
+        rs,
+        )
+	Returns a CSignature object from the given recordset but without the reference data
+
+
+== fillSignatureData ==
+
+fillSignatureData (
+        self,
+        conn,
+        rs,
+        )
+	Returns a CSignature object from the given recordset
+
+
+== getAllEvents ==
+
+getAllEvents ( self,  conn )
+	Returns an array with all the events in the database
+
+
+== getAllSensors ==
+
+getAllSensors ( self,  conn )
+	Returns an array with all the working sensors
+
+
+== getAllSignatures ==
+
+getAllSignatures ( self,  conn )
+	Returns an array with all the signatures found
+
+
+== getEncodingType ==
+
+getEncodingType (
+        self,
+        conn,
+        encoding_id,
+        )
+	Returns an string with the name of the encoding used
+
+
+== getEventByDstIP ==
+
+getEventByDstIP (
+        self,
+        conn,
+        ip,
+        )
+	Returns an array of event objects that match the Destination IP
+
+
+== getEventByDstIPRange ==
+
+getEventByDstIPRange (
+        self,
+        conn,
+        start_ip,
+        end_ip,
+        )
+	Returns and array of event objects that has any of the destination addresses between start_ip and end_ip
+
+
+== getEventByDstPort ==
+
+getEventByDstPort (
+        self,
+        conn,
+        proto,
+        port,
+        )
+	Returns an array of event objects that match the Destination Port
+
+
+== getEventByID ==
+
+getEventByID (
+        self,
+        conn,
+        event_id,
+        )
+	Returns an event object with the specified event_id
+
+
+== getEventByIDRange ==
+
+getEventByIDRange (
+        self,
+        conn,
+        event_id_first,
+        event_id_last,
+        )
+	Returns an array with all events between event_id_first and event_id_last. Use 0 as wildcard
+
+
+== getEventByProtocol ==
+
+getEventByProtocol (
+        self,
+        conn,
+        proto,
+        )
+	Returns an array of event objects that match the Protocol
+
+
+== getEventBySensorID ==
+
+getEventBySensorID (
+        self,
+        conn,
+        sensor_id,
+        )
+	Returns an array of event objects that match the Sensor ID
+
+
+== getEventBySignatureID ==
+
+getEventBySignatureID (
+        self,
+        conn,
+        signature_id,
+        )
+	Returns an array of event objects that match the signature ID
+
+
+== getEventBySrcIP ==
+
+getEventBySrcIP (
+        self,
+        conn,
+        ip,
+        )
+	Returns an array of event objects that match the Source IP
+
+
+== getEventBySrcIPRange ==
+
+getEventBySrcIPRange (
+        self,
+        conn,
+        start_ip,
+        end_ip,
+        )
+	Returns and array of event objects that has any of the source addresses between start_ip and end_ip
+
+
+== getEventBySrcPort ==
+
+getEventBySrcPort (
+        self,
+        conn,
+        proto,
+        port,
+        )
+	Returns an array of event objects that match the Source Port
+
+
+== getEventByTimeRange ==
+
+getEventByTimeRange (
+        self,
+        conn,
+        ts_from,
+        ts_to,
+        )
+	Returns and array of event objects that happened between ts_from and ts_to. Use 0 as wildcard
+
+
+== getEventByTimestamp ==
+
+getEventByTimestamp (
+        self,
+        conn,
+        timestamp,
+        )
+	Returns and array of event objects that happened exactly at the timestamp date
+
+
+== getEventCount ==
+
+getEventCount ( self,  conn )
+	Returns an integer with the number of events occured
+
+
+== getLastEvents ==
+
+getLastEvents (
+        self,
+        conn,
+        number,
+        )
+	Returns an array with the last 'number' events
+
+
+== getPacketPayload ==
+
+getPacketPayload (
+        self,
+        conn,
+        event_id,
+        )
+	Returns the data payload from packet event_id
+
+
+== getProtocolData ==
+
+getProtocolData (
+        self,
+        conn,
+        proto,
+        event_id,
+        sensor_id,
+        )
+	Fills protocol specific data for event_id and ensor_id
+
+
+== getProtocolID ==
+
+getProtocolID ( self,  proto )
+	Returns the integer ID of the protocol
+
+
+== getProtocolName ==
+
+getProtocolName ( self,  num )
+	Returns a string with the name of the protocol num
+
+
+== getQueryString ==
+
+getQueryString ( self )
+	Generates a standard query string using self.sensor_id array
+
+
+== getSigClassID ==
+
+getSigClassID (
+        self,
+        conn,
+        sig_class_name,
+        )
+	Returns the Class_ID for 'sig_class_name'
+
+
+== getSigClassName ==
+
+getSigClassName (
+        self,
+        conn,
+        class_id,
+        )
+	Gets a class Name (sig_class_name) for a class ID (sig_class_id)
+
+
+== getSignatureByClassID ==
+
+getSignatureByClassID (
+        self,
+        conn,
+        sig_class_id,
+        )
+	Returns a CSignature object array given the class id
+
+
+== getSignatureByClassName ==
+
+getSignatureByClassName (
+        self,
+        conn,
+        sig_class,
+        )
+	Returns a CSignature object array given the class name
+
+
+== getSignatureByID ==
+
+getSignatureByID (
+        self,
+        conn,
+        sig_id,
+        )
+	Returns a CSignature object given the corresponding sig_id
+
+
+== getSignatureByName ==
+
+getSignatureByName (
+        self,
+        conn,
+        sig_name,
+        )
+	Returns a CSignature object given the corresponding sig_name
+
+
+== getSignatureByPriority ==
+
+getSignatureByPriority (
+        self,
+        conn,
+        sig_priority,
+        )
+	Returns a CSignature object array given for the given sig_priority
+
+
+== getSignatureByRev ==
+
+getSignatureByRev (
+        self,
+        conn,
+        sig_rev,
+        )
+	Returns a CSignature object given the corresponding sig_rev
+
+
+== getSignatureBySID ==
+
+getSignatureBySID (
+        self,
+        conn,
+        sig_sid,
+        )
+	Returns a CSignature object given the corresponding sig_sid
+
+
+== getUniqueSignatureCount ==
+
+getUniqueSignatureCount ( self,  conn )
+	Returns an integer with the number of unique signatures found
+
+
+== getUniqueSignaturesID ==
+
+getUniqueSignaturesID ( self,  conn )
+	Returns an array of integers with the signature_id of the unique signatures
+
+
+== snortDate2Tuple ==
+
+snortDate2Tuple ( self,  snortdate )
+	Returns snort-formatted date in tuple format
+
+
+== snortIP2dot ==
+
+snortIP2dot ( self,  iplong )
+	Transforms an unsigned long int representing an IP into a full-dotted address
+
+
+== tuple2SnortDate ==
+
+tuple2SnortDate ( self,  datetuple )
+	Returns tuple-formatted date in snort format
+
+
+

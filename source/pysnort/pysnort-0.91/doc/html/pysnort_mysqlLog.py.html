@@ -1,0 +1,1733 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+          "http://www.w3.org/TR/html40/loose.dtd">
+
+<html>
+         
+  <head>
+    <title>Class: mysqlLog</title>
+  </head>
+
+  <body bgcolor="#ffffff">
+
+        <p><i><a href="index.html">Table of Contents</a></i></p>
+        
+        <table border="0" cellpadding="5" cellspacing="0" width="100%">
+        <tr bgcolor="#88bbee">
+            <th rowspan="2"
+                valign="top"
+                align="left"
+                width="10%"><font color="#000000">Class: mysqlLog</font>
+            </th>
+            <th width="90%" align="right"><font color="#000000">pysnort.py</font></th>
+        </tr>
+        <tr>
+        <td>
+        
+<p>Mysql log class</p>
+<table border="0" cellpadding="5" cellspacing="0" width="100%">
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="Methods">Methods</a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        
+
+            <table border="0" cellspacing="2" cellpadding="2" width="100%">
+              <tr>
+            <td align="LEFT" valign="TOP">
+<a href="#__buildDataCustomQuery">__buildDataCustomQuery</a><br>
+<a href="#__buildPortCustomQueryICMP">__buildPortCustomQueryICMP</a><br>
+<a href="#__buildPortCustomQueryTCP">__buildPortCustomQueryTCP</a><br>
+<a href="#__buildPortCustomQueryTCP2">__buildPortCustomQueryTCP2</a><br>
+<a href="#__buildPortCustomQueryUDP">__buildPortCustomQueryUDP</a><br>
+<a href="#__getHostsPorts">__getHostsPorts</a><br>
+<a href="#buildCustomQuery">buildCustomQuery</a><br>
+<a href="#connect">connect</a><br>
+<a href="#dot2SnortIP">dot2SnortIP</a><br>
+<a href="#executeQuery">executeQuery</a><br>
+<a href="#executeRSQuery">executeRSQuery</a><br>
+<a href="#fillEventData">fillEventData</a><br>
+<a href="#fillLightSignatureData">fillLightSignatureData</a><br>
+<a href="#fillSignatureData">fillSignatureData</a><br>
+<a href="#getAllEvents">getAllEvents</a><br>
+<a href="#getAllSensors">getAllSensors</a><br>
+<a href="#getAllSignatures">getAllSignatures</a><br>
+<a href="#getEncodingType">getEncodingType</a><br>
+</td>
+<td align="LEFT" valign="TOP">
+<a href="#getEventByDstIP">getEventByDstIP</a><br>
+<a href="#getEventByDstIPRange">getEventByDstIPRange</a><br>
+<a href="#getEventByDstPort">getEventByDstPort</a><br>
+<a href="#getEventByID">getEventByID</a><br>
+<a href="#getEventByIDRange">getEventByIDRange</a><br>
+<a href="#getEventByProtocol">getEventByProtocol</a><br>
+<a href="#getEventBySensorID">getEventBySensorID</a><br>
+<a href="#getEventBySignatureID">getEventBySignatureID</a><br>
+<a href="#getEventBySrcIP">getEventBySrcIP</a><br>
+<a href="#getEventBySrcIPRange">getEventBySrcIPRange</a><br>
+<a href="#getEventBySrcPort">getEventBySrcPort</a><br>
+<a href="#getEventByTimeRange">getEventByTimeRange</a><br>
+<a href="#getEventByTimestamp">getEventByTimestamp</a><br>
+<a href="#getEventCount">getEventCount</a><br>
+<a href="#getLastEvents">getLastEvents</a><br>
+<a href="#getPacketPayload">getPacketPayload</a><br>
+<a href="#getProtocolData">getProtocolData</a><br>
+<a href="#getProtocolID">getProtocolID</a><br>
+</td>
+<td align="LEFT" valign="TOP">
+<a href="#getProtocolName">getProtocolName</a><br>
+<a href="#getQueryString">getQueryString</a><br>
+<a href="#getSigClassID">getSigClassID</a><br>
+<a href="#getSigClassName">getSigClassName</a><br>
+<a href="#getSignatureByClassID">getSignatureByClassID</a><br>
+<a href="#getSignatureByClassName">getSignatureByClassName</a><br>
+<a href="#getSignatureByID">getSignatureByID</a><br>
+<a href="#getSignatureByName">getSignatureByName</a><br>
+<a href="#getSignatureByPriority">getSignatureByPriority</a><br>
+<a href="#getSignatureByRev">getSignatureByRev</a><br>
+<a href="#getSignatureBySID">getSignatureBySID</a><br>
+<a href="#getUniqueSignatureCount">getUniqueSignatureCount</a><br>
+<a href="#getUniqueSignaturesID">getUniqueSignaturesID</a><br>
+<a href="#snortDate2Tuple">snortDate2Tuple</a><br>
+<a href="#snortIP2dot">snortIP2dot</a><br>
+<a href="#tuple2SnortDate">tuple2SnortDate</a><br>
+</td>
+</tr>
+            </table>
+            
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="__buildDataCustomQuery"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">__buildDataCustomQuery&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+__buildDataCustomQuery ( self,  q )
+
+</pre></font>
+
+<p>Internal Function</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="__buildPortCustomQueryICMP"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">__buildPortCustomQueryICMP&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+__buildPortCustomQueryICMP ( self,  q )
+
+</pre></font>
+
+<p>Internal Function</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="__buildPortCustomQueryTCP"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">__buildPortCustomQueryTCP&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+__buildPortCustomQueryTCP ( self,  q )
+
+</pre></font>
+
+<h3>Internal Function</h3>
+<p> GOTTA MAKE THIS BETTER!</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="__buildPortCustomQueryTCP2"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">__buildPortCustomQueryTCP2&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+__buildPortCustomQueryTCP2 ( self,  q )
+
+</pre></font>
+
+<p>Internal Function</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="__buildPortCustomQueryUDP"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">__buildPortCustomQueryUDP&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+__buildPortCustomQueryUDP ( self,  q )
+
+</pre></font>
+
+<p>Internal Function</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="__getHostsPorts"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">__getHostsPorts&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+__getHostsPorts (
+        self,
+        conn,
+        cid,
+        proto,
+        )
+
+</pre></font>
+
+<p>Internal Function</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="buildCustomQuery"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">buildCustomQuery&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+buildCustomQuery ( self,  q )
+
+</pre></font>
+
+<p>Builds an SQL String with the corresponding sensor ids</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="connect"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">connect&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+connect (
+        self,
+        host,
+        user,
+        password,
+        )
+
+</pre></font>
+
+<p>Connects with the database and returns a connection object</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="dot2SnortIP"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">dot2SnortIP&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+dot2SnortIP ( self,  dotip )
+
+</pre></font>
+
+<p>Transforms a dotted-address IP into an unsigned long int</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="executeQuery"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">executeQuery&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+executeQuery (
+        self,
+        conn,
+        query_clause,
+        )
+
+</pre></font>
+
+<p>Executes a query and returns the error code</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="executeRSQuery"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">executeRSQuery&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+executeRSQuery (
+        self,
+        conn,
+        query_clause,
+        )
+
+</pre></font>
+
+<p>Executes a query and returns an array with the data</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="fillEventData"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">fillEventData&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+fillEventData (
+        self,
+        conn,
+        rs,
+        )
+
+</pre></font>
+
+<p>Fills the Event class with the cursor rs</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="fillLightSignatureData"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">fillLightSignatureData&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+fillLightSignatureData (
+        self,
+        conn,
+        rs,
+        )
+
+</pre></font>
+
+<p>Returns a CSignature object from the given recordset but without the reference data</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="fillSignatureData"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">fillSignatureData&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+fillSignatureData (
+        self,
+        conn,
+        rs,
+        )
+
+</pre></font>
+
+<p>Returns a CSignature object from the given recordset</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getAllEvents"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getAllEvents&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getAllEvents ( self,  conn )
+
+</pre></font>
+
+<p>Returns an array with all the events in the database</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getAllSensors"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getAllSensors&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getAllSensors ( self,  conn )
+
+</pre></font>
+
+<p>Returns an array with all the working sensors</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getAllSignatures"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getAllSignatures&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getAllSignatures ( self,  conn )
+
+</pre></font>
+
+<p>Returns an array with all the signatures found</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getEncodingType"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getEncodingType&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getEncodingType (
+        self,
+        conn,
+        encoding_id,
+        )
+
+</pre></font>
+
+<p>Returns an string with the name of the encoding used</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getEventByDstIP"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getEventByDstIP&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getEventByDstIP (
+        self,
+        conn,
+        ip,
+        )
+
+</pre></font>
+
+<p>Returns an array of event objects that match the Destination IP</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getEventByDstIPRange"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getEventByDstIPRange&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getEventByDstIPRange (
+        self,
+        conn,
+        start_ip,
+        end_ip,
+        )
+
+</pre></font>
+
+<p>Returns and array of event objects that has any of the destination addresses between start_ip and end_ip</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getEventByDstPort"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getEventByDstPort&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getEventByDstPort (
+        self,
+        conn,
+        proto,
+        port,
+        )
+
+</pre></font>
+
+<p>Returns an array of event objects that match the Destination Port</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getEventByID"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getEventByID&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getEventByID (
+        self,
+        conn,
+        event_id,
+        )
+
+</pre></font>
+
+<p>Returns an event object with the specified event_id</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getEventByIDRange"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getEventByIDRange&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getEventByIDRange (
+        self,
+        conn,
+        event_id_first,
+        event_id_last,
+        )
+
+</pre></font>
+
+<p>Returns an array with all events between event_id_first and event_id_last. Use 0 as wildcard</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getEventByProtocol"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getEventByProtocol&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getEventByProtocol (
+        self,
+        conn,
+        proto,
+        )
+
+</pre></font>
+
+<p>Returns an array of event objects that match the Protocol</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getEventBySensorID"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getEventBySensorID&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getEventBySensorID (
+        self,
+        conn,
+        sensor_id,
+        )
+
+</pre></font>
+
+<p>Returns an array of event objects that match the Sensor ID</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getEventBySignatureID"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getEventBySignatureID&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getEventBySignatureID (
+        self,
+        conn,
+        signature_id,
+        )
+
+</pre></font>
+
+<p>Returns an array of event objects that match the signature ID</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getEventBySrcIP"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getEventBySrcIP&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getEventBySrcIP (
+        self,
+        conn,
+        ip,
+        )
+
+</pre></font>
+
+<p>Returns an array of event objects that match the Source IP</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getEventBySrcIPRange"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getEventBySrcIPRange&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getEventBySrcIPRange (
+        self,
+        conn,
+        start_ip,
+        end_ip,
+        )
+
+</pre></font>
+
+<p>Returns and array of event objects that has any of the source addresses between start_ip and end_ip</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getEventBySrcPort"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getEventBySrcPort&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getEventBySrcPort (
+        self,
+        conn,
+        proto,
+        port,
+        )
+
+</pre></font>
+
+<p>Returns an array of event objects that match the Source Port</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getEventByTimeRange"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getEventByTimeRange&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getEventByTimeRange (
+        self,
+        conn,
+        ts_from,
+        ts_to,
+        )
+
+</pre></font>
+
+<p>Returns and array of event objects that happened between ts_from and ts_to. Use 0 as wildcard</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getEventByTimestamp"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getEventByTimestamp&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getEventByTimestamp (
+        self,
+        conn,
+        timestamp,
+        )
+
+</pre></font>
+
+<p>Returns and array of event objects that happened exactly at the timestamp date</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getEventCount"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getEventCount&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getEventCount ( self,  conn )
+
+</pre></font>
+
+<p>Returns an integer with the number of events occured</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getLastEvents"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getLastEvents&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getLastEvents (
+        self,
+        conn,
+        number,
+        )
+
+</pre></font>
+
+<p>Returns an array with the last <code>number</code> events</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getPacketPayload"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getPacketPayload&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getPacketPayload (
+        self,
+        conn,
+        event_id,
+        )
+
+</pre></font>
+
+<p>Returns the data payload from packet event_id</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getProtocolData"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getProtocolData&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getProtocolData (
+        self,
+        conn,
+        proto,
+        event_id,
+        sensor_id,
+        )
+
+</pre></font>
+
+<p>Fills protocol specific data for event_id and ensor_id</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getProtocolID"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getProtocolID&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getProtocolID ( self,  proto )
+
+</pre></font>
+
+<p>Returns the integer ID of the protocol</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getProtocolName"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getProtocolName&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getProtocolName ( self,  num )
+
+</pre></font>
+
+<p>Returns a string with the name of the protocol num</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getQueryString"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getQueryString&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getQueryString ( self )
+
+</pre></font>
+
+<p>Generates a standard query string using self.sensor_id array</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getSigClassID"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getSigClassID&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getSigClassID (
+        self,
+        conn,
+        sig_class_name,
+        )
+
+</pre></font>
+
+<p>Returns the Class_ID for <code>sig_class_name</code></p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getSigClassName"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getSigClassName&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getSigClassName (
+        self,
+        conn,
+        class_id,
+        )
+
+</pre></font>
+
+<p>Gets a class Name (sig_class_name) for a class ID (sig_class_id)</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getSignatureByClassID"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getSignatureByClassID&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getSignatureByClassID (
+        self,
+        conn,
+        sig_class_id,
+        )
+
+</pre></font>
+
+<p>Returns a CSignature object array given the class id</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getSignatureByClassName"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getSignatureByClassName&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getSignatureByClassName (
+        self,
+        conn,
+        sig_class,
+        )
+
+</pre></font>
+
+<p>Returns a CSignature object array given the class name</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getSignatureByID"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getSignatureByID&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getSignatureByID (
+        self,
+        conn,
+        sig_id,
+        )
+
+</pre></font>
+
+<p>Returns a CSignature object given the corresponding sig_id</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getSignatureByName"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getSignatureByName&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getSignatureByName (
+        self,
+        conn,
+        sig_name,
+        )
+
+</pre></font>
+
+<p>Returns a CSignature object given the corresponding sig_name</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getSignatureByPriority"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getSignatureByPriority&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getSignatureByPriority (
+        self,
+        conn,
+        sig_priority,
+        )
+
+</pre></font>
+
+<p>Returns a CSignature object array given for the given sig_priority</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getSignatureByRev"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getSignatureByRev&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getSignatureByRev (
+        self,
+        conn,
+        sig_rev,
+        )
+
+</pre></font>
+
+<p>Returns a CSignature object given the corresponding sig_rev</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getSignatureBySID"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getSignatureBySID&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getSignatureBySID (
+        self,
+        conn,
+        sig_sid,
+        )
+
+</pre></font>
+
+<p>Returns a CSignature object given the corresponding sig_sid</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getUniqueSignatureCount"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getUniqueSignatureCount&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getUniqueSignatureCount ( self,  conn )
+
+</pre></font>
+
+<p>Returns an integer with the number of unique signatures found</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="getUniqueSignaturesID"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">getUniqueSignaturesID&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+getUniqueSignaturesID ( self,  conn )
+
+</pre></font>
+
+<p>Returns an array of integers with the signature_id of the unique signatures</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="snortDate2Tuple"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">snortDate2Tuple&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+snortDate2Tuple ( self,  snortdate )
+
+</pre></font>
+
+<p>Returns snort-formatted date in tuple format</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="snortIP2dot"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">snortIP2dot&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+snortIP2dot ( self,  iplong )
+
+</pre></font>
+
+<p>Transforms an unsigned long int representing an IP into a full-dotted address</p>
+
+        <tr>
+            <th bgcolor="#99ccff"
+                rowspan="2"
+                valign="top"
+                align="left"
+                width="20%"
+                >
+                <font color="#000000">
+                  <a name="tuple2SnortDate"></a>&nbsp;
+                </font>
+            </th>
+            <th bgcolor="#99ccff"
+                valign="top"
+                align="left"
+                width="80%"
+                >
+                <font color="#000000">tuple2SnortDate&nbsp;</font>
+            </th>
+        </tr>
+        <tr>
+        <td>
+        <font color="#000088"><pre>
+tuple2SnortDate ( self,  datetuple )
+
+</pre></font>
+
+<p>Returns tuple-formatted date in snort format</p>
+</td></tr>
+</td></tr>
+</table>
+
+        </td>
+        </tr>
+        </table>
+
+        <hr>
+
+        <p><i><a href="index.html">Table of Contents</a></i></p>
+
+        <font size="-2"><i>This document was automatically generated
+        on Mon Jul  1 13:48:14 2002 by
+        <a href="http://happydoc.sourceforge.net">HappyDoc</a> version
+        2.0.1</i></font>
+        
+        </body>
+        </html>
+        

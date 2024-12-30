@@ -1,0 +1,7 @@
+Metadata-Version: 2.1
+Name: pysnort
+Version: 0.91
+Summary: Snort-IDS Library
+Home-page: http://pysnort.sourceforge.net
+Author: Ignacio Vazquez
+Author-email: irvazquez@users.sourceforge.net
