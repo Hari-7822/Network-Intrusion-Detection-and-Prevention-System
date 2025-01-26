@@ -1,4 +1,0 @@
-pysnort.egg-info/PKG-INFO
-pysnort.egg-info/SOURCES.txt
-pysnort.egg-info/dependency_links.txt
-pysnort.egg-info/top_level.txt

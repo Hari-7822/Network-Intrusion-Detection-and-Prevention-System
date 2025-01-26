@@ -1,2 +1,6 @@
 venv/
 source/
+dist/
+*.zip
+
+__pycache__/
